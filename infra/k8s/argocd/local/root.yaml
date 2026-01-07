@@ -1,0 +1,25 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: atlas-argocd-local
+  namespace: argocd
+  labels:
+    owner: "aymene01"
+    project: "atlas"
+    organization: "atlas"
+    service: "atlas"
+    environment: "local"
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/aymene01/atlas.git
+    targetRevision: main
+    path: infra/k8s/argocd/local
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: argocd
+  syncPolicy:
+    automated: {}
+    syncOptions:
+      - ServerSideApply=true
