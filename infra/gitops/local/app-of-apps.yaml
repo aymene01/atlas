@@ -9,7 +9,7 @@ spec:
   source:
     repoURL: https://github.com/aymene01/atlas.git
     targetRevision: main
-    path: infra/k8s/gitops/local/
+    path: infra/gitops/local/
   destination:
     server: https://kubernetes.default.svc
     namespace: argocd
