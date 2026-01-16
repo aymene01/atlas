@@ -11,7 +11,7 @@ spec:
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: helm/hello-word
+    path: helm/hello-world
     repoURL: https://github.com/giantswarm/hello-world-app
     targetRevision: HEAD
   syncPolicy:
