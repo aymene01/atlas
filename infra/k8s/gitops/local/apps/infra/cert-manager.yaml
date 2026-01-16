@@ -1,19 +1,25 @@
----
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   name: cert-manager
   namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
 spec:
   project: default
   source:
-    repoURL: https://github.com/aymene01/atlas.git
-    targetRevision: main
-    path: infra/k8s/argocd/local/apps/infra/cert-manager
+    repoURL: https://charts.jetstack.io
+    chart: cert-manager
+    targetRevision: 'v1.19.2'
+    helm:
+      parameters:
+        - name: installCRDs
+          value: 'true'
   destination:
-    server: https://kubernetes.default.svc
-    namespace: argocd
+    namespace: cert-manager
+    name: kind
   syncPolicy:
     automated: {}
     syncOptions:
+      - CreateNamespace=true
       - ServerSideApply=true
