@@ -1,18 +1,18 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
-  name: guestbook
+  name: hello-world
   namespace: argocd
   finalizers:
   - resources-finalizer.argocd.argoproj.io
 spec:
   destination:
-    namespace: guestbook
+    namespace: hello-world
     server: https://kubernetes.default.svc
   project: default
   source:
-    path: general/helm-guestbook
-    repoURL: https://github.com/morey-tech/argocd-example-apps
+    path: helm/hello-word
+    repoURL: https://github.com/giantswarm/hello-world-app
     targetRevision: HEAD
   syncPolicy:
     automated:
