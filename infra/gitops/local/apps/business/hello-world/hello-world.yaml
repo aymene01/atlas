@@ -15,9 +15,8 @@ spec:
     repoURL: https://github.com/giantswarm/hello-world-app
     targetRevision: HEAD
     helm:
-      values: |
-        ingress:
-          enabled: false
+      valuesFiles:
+        - values.yaml
   syncPolicy:
     automated:
       prune: true
