@@ -3,20 +3,23 @@ kind: Application
 metadata:
   name: hello-world
   namespace: argocd
-  finalizers:
-  - resources-finalizer.argocd.argoproj.io
 spec:
+  project: default
+  sources:
+    - repoURL: https://github.com/giantswarm/hello-world-app
+      path: helm/hello-world
+      targetRevision: HEAD
+      helm:
+        valueFiles:
+          - $values/infra/gitops/local/apps/business/hello-world/values.yaml
+
+    - repoURL: https://github.com/aymene01/atlas.git
+      targetRevision: main
+      ref: values
+
   destination:
     namespace: hello-world
     server: https://kubernetes.default.svc
-  project: default
-  source:
-    path: helm/hello-world
-    repoURL: https://github.com/giantswarm/hello-world-app
-    targetRevision: HEAD
-    helm:
-      valuesFiles:
-        - values.yaml
   syncPolicy:
     automated:
       prune: true
